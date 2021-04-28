@@ -9,10 +9,10 @@ create table temporal3(
 );
 SET @@GLOBAL.local_infile = 1;
 
-LOAD DATA LOCAL INFILE 'C:/Users/luisenriqueroman2001/Desktop/Proyecto2/CargaP-III.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/luisenriqueroman2001/Desktop/Proyecto2/Carga/CargaP-III.csv'
 INTO table temporal3
 FIELDS terminated by ';' ENCLOSED BY '"'
-lines TERMINATED BY '\n'
+lines TERMINATED BY '\r\n'
 ignore 1 rows;
 
 create table temporal2(
@@ -23,11 +23,25 @@ create table temporal2(
     pais varchar(150) null,
     respuesta_pais character null
 );
-LOAD DATA LOCAL INFILE 'C:/Users/luisenriqueroman2001/Desktop/Proyecto2/CargaP-II.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/luisenriqueroman2001/Desktop/Proyecto2/Carga/CargaP-II.csv'
 INTO table temporal2
 FIELDS terminated by ';' ENCLOSED BY '"'
 lines TERMINATED BY '\n'
-ignore 1 rows;
+ignore 1 rows
+(
+@NOMBRE_ENCUESTA,
+@PREGUNTA,
+@RESPUESTA_POSIBLE,
+@RESPUESTA_CORRECTA,
+@PAIS,
+@RESPUESTA_PAIS
+)set 
+nombre_encuesta = @NOMBRE_ENCUESTA,
+pregunta = @PREGUNTA,
+respuesta_posible=@RESPUESTA_POSIBLE,
+respuesta_correcta=@RESPUESTA_CORRECTA,
+PAIS =  TRIM(NULLIF(@PAIS,'')),
+respuesta_pais =@RESPUESTA_PAIS;
 select * from temporal2;
 
 create table temporal1(
@@ -53,7 +67,7 @@ create table temporal1(
     este character null,
     oeste character null
 );
-LOAD DATA LOCAL INFILE 'C:/Users/luisenriqueroman2001/Desktop/Proyecto2/CargaP-I.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/luisenriqueroman2001/Desktop/Proyecto2/Carga/CargaP-I.csv'
 INTO table temporal1
 FIELDS terminated by ';' ENCLOSED BY '"'
 lines TERMINATED BY '\n'
@@ -61,4 +75,4 @@ ignore 1 rows
 (invento,inventor,profesional_asg_al_invento,prof_es_jefe_del_area,@fecha_contrato,salario,comision,area_invest_prof,ranking,anio_invento,pais_invento,pais_inventor,region_pais,capital,
 poblacion_pais,area_km2,frontera_con,norte,sur,este,oeste)
 SET fecha_contrato = STR_TO_DATE(@fecha_contrato, '%d/%m/%Y');
-select * from temporal1;
+select * from temporal1 limit 2000;
