@@ -1,25 +1,26 @@
+DROP PROCEDURE SP_DROPPEARTABLAS;
+DROP PROCEDURE SP_CREARTABLAS;
 CALL SP_DROPPEARTABLAS();
 CALL SP_CREARTABLAS();
 DELIMITER $$
 CREATE PROCEDURE SP_DROPPEARTABLAS()
 	BEGIN
 		SET FOREIGN_KEY_CHECKS=0;
-		DROP TABLE profesional;
-        DROP TABLE continente;
-        DROP TABLE encuesta;
-        DROP TABLE area;
-        DROP TABLE region;
-        DROP TABLE pais;
-        DROP TABLE frontera;
-        DROP TABLE pregunta;
-        DROP TABLE respuesta;
-        DROP TABLE pais_respuesta;
-        DROP TABLE resp_corr;
-        DROP TABLE invento;
-        DROP TABLE inventor;
-        DROP TABLE inventado;
-        DROP TABLE asg_invento;
-        DROP TABLE profe_area;
+		DROP TABLE IF EXISTS profesional;
+        DROP TABLE IF EXISTS encuesta;
+        DROP TABLE IF EXISTS area;
+        DROP TABLE IF EXISTS region;
+        DROP TABLE IF EXISTS pais;
+        DROP TABLE IF EXISTS frontera;
+        DROP TABLE IF EXISTS pregunta;
+        DROP TABLE IF EXISTS respuesta;
+        DROP TABLE IF EXISTS pais_respuesta;
+        DROP TABLE IF EXISTS resp_corr;
+        DROP TABLE IF EXISTS invento;
+        DROP TABLE IF EXISTS inventor;
+        DROP TABLE IF EXISTS inventado;
+        DROP TABLE IF EXISTS asg_invento;
+        DROP TABLE IF EXISTS profe_area;
         SET FOREIGN_KEY_CHECKS=1;
     END;
 $$
@@ -27,7 +28,7 @@ $$
 DELIMITER $$
 CREATE PROCEDURE SP_CREARTABLAS()
 	BEGIN 
-		create table profesional (
+		create table if not exists profesional (
 			id_profesional int not null auto_increment primary key,
 			nombre varchar(150) not null,
 			fecha_contrato date not null,
@@ -35,17 +36,13 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			comision int
 		);
 
-		create table continente(
-			id_continente int not null auto_increment primary key,
-			continente varchar(100) not null
-		);
 
-		create table encuesta(
+		create table if not exists encuesta(
 			id_encuesta int not null auto_increment primary key,
 			encuesta varchar(150) not null
 		);
 
-		create table area(
+		create table if not exists area(
 			id_area int not null auto_increment primary key,
 			area varchar(150) not null,
 			ranking int not null,
@@ -53,14 +50,15 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			FOREIGN KEY (id_profesional) REFERENCES profesional(id_profesional)
 		);
 
-		create table region(
-			id_region int not null auto_increment primary key,
-			region varchar(150) not null,
-			id_continente int not null,
-			FOREIGN KEY (id_continente) REFERENCES continente(id_continente)
+		CREATE TABLE if not exists region(
+			id_region INTEGER AUTO_INCREMENT,
+			region VARCHAR(75) NOT NULL,
+			region_padre INTEGER,
+			CONSTRAINT pk_region PRIMARY KEY (id_region),
+			CONSTRAINT fk_region_padre FOREIGN KEY(region_padre) REFERENCES region(id_region)
 		);
 
-		create table pais(
+		create table if not exists pais(
 			id_pais int not null auto_increment primary key,
 			pais varchar(150) not null,
 			capital varchar(150) not null,
@@ -73,7 +71,7 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			or ( ( id_continente is not null ) and ( id_region is null ) ) )
 		);
 
-		create table frontera(
+		create table if not exists frontera(
 			id_frontera int not null auto_increment primary key,
 			norte varchar(1),
 			sur varchar(1),
@@ -85,21 +83,21 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			FOREIGN KEY (check_frontera) REFERENCES pais(id_pais)
 		);
 
-		create table pregunta(
+		create table if not exists pregunta(
 			id_pregunta int not null auto_increment primary key,
 			pregunta varchar(500) not null,
 			id_encuesta int not null,
 			FOREIGN KEY (id_encuesta) REFERENCES encuesta(id_encuesta)
 		);
 
-		create table respuesta(
+		create table if not exists respuesta(
 			id_respuesta int not null auto_increment primary key,
 			respuesta varchar(500) not null,
 			id_pregunta int not null,
 			FOREIGN KEY (id_pregunta) REFERENCES pregunta(id_pregunta)
 		);
 
-		create table pais_respuesta(
+		create table if not exists pais_respuesta(
 			id_pais_respuesta int not null auto_increment primary key,
 			id_pais int not null,
 			id_respuesta int not null,
@@ -107,7 +105,7 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			FOREIGN KEY (id_respuesta) REFERENCES respuesta(id_respuesta)
 		);
 
-		create table resp_corr(
+		create table if not exists resp_corr(
 			id_pregunta int not null,
 			id_respuesta int not null,
 			constraint primary key ( id_pregunta, id_respuesta ),
@@ -115,7 +113,7 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			FOREIGN KEY (id_respuesta) REFERENCES respuesta(id_respuesta)
 		);
 
-		create table invento(
+		create table if not exists invento(
 			id_invento int not null auto_increment primary key, 
 			nombre varchar(150) not null,
 			anio_invento int not null,
@@ -123,14 +121,14 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			FOREIGN KEY (id_pais) REFERENCES pais(id_pais)
 		);
 
-		create table inventor(
+		create table if not exists inventor(
 			id_inventor int not null auto_increment primary key,
 			nombre varchar(150) not null,
 			id_pais int,
 			FOREIGN KEY (id_pais) REFERENCES pais(id_pais)
 		);
 
-		create table inventado(
+		create table if not exists inventado(
 			id_invento int not null,
 			id_inventor int not null,
 			constraint primary key (id_invento, id_inventor),
@@ -138,7 +136,7 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			FOREIGN KEY (id_inventor) REFERENCES inventor(id_inventor)
 		);
 
-		create table asg_invento(
+		create table if not exists asg_invento(
 			id_profesional int not null,
 			id_invento int not null ,
 			constraint primary key (id_invento, id_profesional),
@@ -146,7 +144,7 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			FOREIGN KEY (id_profesional) REFERENCES profesional(id_profesional)
 		);
 
-		create table profe_area(
+		create table if not exists profe_area(
 			id_area int not null,
 			id_profesional int not null,
 			constraint primary key (id_area, id_profesional),
