@@ -75,4 +75,4 @@ ignore 1 rows
 (invento,inventor,profesional_asg_al_invento,prof_es_jefe_del_area,@fecha_contrato,salario,comision,area_invest_prof,ranking,anio_invento,pais_invento,pais_inventor,region_pais,capital,
 poblacion_pais,area_km2,frontera_con,norte,sur,este,oeste)
 SET fecha_contrato = STR_TO_DATE(@fecha_contrato, '%d/%m/%Y');
-select * from temporal1 limit 2000;
+select distinct * from temporal1 where frontera_con = '' limit 2000;

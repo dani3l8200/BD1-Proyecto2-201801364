@@ -78,7 +78,7 @@ CREATE PROCEDURE SP_CREARTABLAS()
 			este varchar(1),
 			oeste varchar(1),
 			id_pais int not null,
-			check_frontera int not null,
+			check_frontera int,
 			FOREIGN KEY (id_pais) REFERENCES pais(id_pais),
 			FOREIGN KEY (check_frontera) REFERENCES pais(id_pais)
 		);

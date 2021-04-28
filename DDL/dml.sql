@@ -1,5 +1,5 @@
 CALL SP_SETEARDATA();
-
+DROP PROCEDURE SP_SETEARDATA;
 DELIMITER $$
 CREATE PROCEDURE SP_SETEARDATA()
 	BEGIN
@@ -34,16 +34,22 @@ CREATE PROCEDURE SP_SETEARDATA()
 
 		insert into pais (pais, capital, poblacion, area_km2, id_region)
 		select distinct t.pais_inventor, t.capital, t.poblacion_pais, t.area_km2, r.id_region from temporal1 t, region r 
-		where  t.region_pais = r.region ;
+		where  t.region_pais = r.region;
 
 
 		insert into frontera(id_pais, check_frontera, norte, sur, este, oeste)
-		select distinct p.id_pais, f.id_pais as frontera, t.norte, t.sur, t.este, t.oeste
+		(select distinct p.id_pais, f.id_pais as frontera, t.norte, t.sur, t.este, t.oeste
 		from temporal1 t
 		inner join pais p on t.pais_inventor = p.pais
 		inner join pais f on t.frontera_con = f.pais
-		where frontera_con != '';
-
+		where frontera_con != '')
+        UNION (
+			select distinct p.id_pais, null as frontera, t.norte, t.sur, t.este, t.oeste
+			from temporal1 t
+			inner join pais p on t.pais_inventor = p.pais
+			where frontera_con = ''
+        );
+		
 		insert into pregunta (pregunta, id_encuesta) 
 		select distinct t.pregunta, en.id_encuesta from temporal2 t, encuesta en
 		where en.encuesta = t.nombre_encuesta;
