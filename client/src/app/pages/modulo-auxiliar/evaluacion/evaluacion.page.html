@@ -1,0 +1,219 @@
+<ion-header>
+    <ion-toolbar >
+      <ion-title ><h5 class="card-title text-center"><ion-icon name="keypad"></ion-icon>  Evaluaciones </h5></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content >
+    
+      <body>
+          <div class="form-group" style="text-align: right;">        
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit"  [routerLink]="['/gestion-evaluacion']"  class="btn btn-primary">⬅ Regresar a la Gestion de Cursos </button>
+              </div>
+          </div>
+          <ion-row>
+        <ion-col width-50 style="text-align: center">
+    <button ion-button block (click)="accion1()" > Crear Evaluaciones </button>
+  </ion-col>
+     
+  <ion-card *ngIf="ocultar1">
+     
+     
+    
+        <div class="boxContenedor">
+    <div class="container" >
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body" style="background: greenyellow;">
+                <h5 style="text-align: center;">Crear Evaluaciones</h5>
+              <form  class="form-signin" [formGroup]="CursosRegisterForm" (ngSubmit) = "crearEvaluaciones()" >
+                   <label for="inputEmail">Nombre Evaluacion</label>
+                <div class="form-label-group">
+                   <input required id="nombre" type="text"   formControlName="nombre"  class="form-control" placeholder="Nombre" name="nombre">
+                   
+                </div>
+                <label for="inputEmail" >Punteo</label>
+                
+                <div class="form-label-group" >                     
+                  <input  id="apellido" type="text"  class="form-control"  formControlName="punteo" name="apellido" placeholder="Apellido">
+             
+                </div>
+    
+                
+              
+    
+    
+                <label for="inputEmail" >Codigo Curso</label>
+                
+                <div class="form-label-group" >                     
+                  <input  id="correo_electronico" type="text"    formControlName="codigo_detallescurso" class="form-control" name="correo_electronico" placeholder="correo_electronico">
+           
+                </div>
+               
+               
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!CursosRegisterForm.valid" type="submit">Crear Cursos</button>
+               <hr class="my-4">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+  
+    
+  </ion-card>
+  <ion-col width-50 style="text-align: center">
+      <button ion-button block (click)="accion2()" > Eliminar Evaluaciones </button>
+    </ion-col>
+    <ion-card *ngIf="ocultar2">
+     
+     
+    
+        <div class="boxContenedor">
+    <div class="container" >
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body" style="background: mediumspringgreen;">
+              <h5 style="text-align: center;">Eliminar Evaluacion</h5>
+              <form  class="form-signin" [formGroup]="DeleteRegisterForm" (ngSubmit) = "EliminarEvaluacion()" >
+                   <label for="inputEmail">Codigo de la Evaluacion</label>
+                <div class="form-label-group">
+                   <input required id="id" type="number" formControlName="codigo_evaluacion"   class="form-control" placeholder="id" name="id">
+                   
+                </div>
+               
+                
+                <button class="btn btn-lg btn-primary btn-block text-uppercase"[disabled]="!DeleteRegisterForm.valid" type="submit">Eliminar Cursos</button>
+               <hr class="my-4">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+  </ion-card>
+  <ion-col width-50 style="text-align: center">
+      <button ion-button block (click)="accion3()" > Editar Evaluaciones </button>
+    </ion-col>
+       
+    <ion-card *ngIf="ocultar3">
+       
+       
+      
+          <div class="boxContenedor">
+      <div class="container" >
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+              <div class="card-body" style="background: yellow;">
+                  <h5 style="text-align: center;">Editar Evaluaciones</h5>
+                <form  class="form-signin"  [formGroup]="UpdateRegisterForm" (ngSubmit) = "actualizarEvaluaciones()" >
+                     <label for="inputEmail">Codigo Evaluacion</label>
+                  <div class="form-label-group">
+                     <input required id="id" type="text"  formControlName="codigo_evaluacion"  class="form-control" placeholder="id" name="id">
+                     
+                  </div>
+                  <label for="inputEmail" >Nombre</label>
+                  
+                  <div class="form-label-group" >                     
+                    <input  id="nombre" type="text"  class="form-control" formControlName="nombre" name="nombre" placeholder="nombre">
+               
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="inputEmail" >Habilitar</label>
+                      <div class="col-sm-10">           
+                        
+                        <select class="form-control" id="inlineFormInputGroup" placeholder="Estado" formControlName="habilitar" name="estado" >
+                          <option value="0">Deshabilitado</option>
+                          <option value="1">Habilitado</option>
+                        </select>
+                 
+                      </div>
+                  </div>
+      
+                  <div class="form-group">
+                      <label for="inputEmail" >Aleatorio</label>
+                      <div class="col-sm-10">           
+                        
+                        <select class="form-control" id="inlineFormInputGroup" placeholder="Estado" formControlName="aleatorio" name="estado" >
+                          <option value="0">No</option>
+                          <option value="1">Si</option>
+                        </select>
+                 
+                      </div>
+                  </div>
+                  <label for="inputEmail" >Punteo</label>
+                  
+                  <div class="form-label-group" >                     
+                    <input  id="nombre" type="text"  class="form-control" formControlName="punteo" name="nombre" placeholder="nombre">
+               
+                  </div>
+                  <label for="inputEmail" >ID Curso</label>
+                  
+                  <div class="form-label-group" >                     
+                    <input  id="nombre" type="text"  class="form-control" formControlName="codigo_detallescurso" name="nombre" placeholder="nombre">
+               
+                  </div>
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase"[disabled]="!UpdateRegisterForm.valid" type="submit">Actualizar Cursos</button>
+                 <hr class="my-4">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+      
+    </ion-card>
+    <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion4()" > Ver Evaluaciones </button>
+      </ion-col>
+         
+      <ion-card *ngIf="ocultar4">
+         
+         
+        
+            <div class="boxContenedor">
+                <h1 style="text-align: center;">Mis Evaluaciones</h1>
+                
+                <table class="table table-hover" style= "background: linear-gradient(to right, blue, magenta)">
+                    <thead>
+                      <tr>
+                        <th scope="col">#ID Evaluacion</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Habilitado</th>
+                        <th scope="col">Aleatorio</th>
+                        <th scope="col">Punteo</th>
+                        <th scope="col">ID Curso</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor = "let allCursos of allCursos">
+                        <td>{{allCursos.codigo_evaluacion}}</td>
+                        <td>{{allCursos.nombre}}</td>
+                        <td *ngIf="allCursos.habilitar == 0">inhabilitado</td>
+                        <td *ngIf="allCursos.habilitar == 1">Habilitado</td>
+                        <td *ngIf="allCursos.aleatorio == 0">Si</td>
+                       <td *ngIf="allCursos.aleatorio == 1">No</td>
+                       <td>{{allCursos.punteo}}</td>
+                       <td>{{allCursos.codigo_detallescurso}}</td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+            </div>
+      
+        
+      </ion-card>
+  </ion-row>
+  </body>
+      
+  </ion-content>
+  

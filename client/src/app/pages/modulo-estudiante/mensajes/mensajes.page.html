@@ -1,0 +1,149 @@
+<ion-header>
+    <ion-toolbar >
+      <ion-title ><h5 class="card-title text-center"><ion-icon name="keypad"></ion-icon>  Cursos </h5></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content >
+    
+      <body>
+          <div class="boxContenedor">
+          <div class="form-group" style="text-align: right;">        
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit"  [routerLink]="['/inicio-estudiante']"  class="btn btn-primary">⬅ Regresar al modulo estudiante </button>
+              </div>
+          </div>
+          <ion-row>
+        <ion-col width-50 style="text-align: center">
+    <button ion-button block (click)="accion1()" > <ion-icon name="logo-twitch"></ion-icon>  Enviar Mensaje </button>
+  </ion-col>
+     
+  <ion-card *ngIf="ocultar1">
+     
+     
+    
+        <div class="boxContenedor">
+            <div class="container" >
+                <div class="row">
+                  <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                      <div class="card-body" style="background: greenyellow;">
+                        
+                        <form  class="form-signin" [formGroup]="CursosRegisterForm" (ngSubmit) = "EnviarMensaje()" >
+                            <label for="inputEmail">Remitente</label>
+                          <div class="form-label-group">
+                            <input required id="idMensaje" type="text"  formControlName="codigo_alumno"  class="form-control" placeholder="idMensaje" name="idMensaje">
+                      
+                          </div>
+                          <label for="inputEmail" >Destinatario</label>
+                          
+                          <div class="form-label-group" >                     
+                            <input  id="remitente" type="text" formControlName="codigo_auxiliar" class="form-control"  name="remitente" placeholder="remitente">
+                    
+                          </div>
+          
+                          <label for="inputEmail" >Asunto</label>
+                          
+                          <div class="form-label-group" >                     
+                            <input  id="destinatario" type="text" formControlName="asunto"  class="form-control" name="destinatario" placeholder="destinatario">
+                        
+                          </div>
+                        
+                          <label for="inputPassword" >Texto</label>
+                          
+                          <div class="form-label-group" >                     
+                            <input  id="cuerpo" type="text"  formControlName="richtext" class="form-control" name="cuerpo" placeholder="cuerpo">
+                          
+                          </div>      
+                          <div class="pos-r">
+                              <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="customFileLang" lang="es" formControlName="archivo" name="file">
+                              <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                              </div>
+                            </div>       
+          
+                          <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!CursosRegisterForm.valid" type="submit">Enviar Mensaje</button>
+                        
+                          <hr class="my-4">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+  
+    
+  </ion-card>
+  <ion-col width-50 style="text-align: center">
+      <button ion-button block (click)="accion2()" > <ion-icon name="logo-whatsapp"></ion-icon>  Bandeja de Entrada </button>
+    </ion-col>
+    <ion-card *ngIf="ocultar2">
+     
+     
+    
+        
+        <div class="boxContenedor1">
+            <div class="container" *ngFor = "let MisMensajes of MisMensajes">
+                <img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" alt="Avatar" style="width:25%;">
+                <h3 style="text-align: center; font-size: 15px;">Asunto:  {{MisMensajes.asunto}} </h3>
+                <h1 style="text-align: right; font-size: 15px;">Enviado a auxiliar: {{MisMensajes.codigo_auxiliar}}</h1>
+                <h2 style="text-align: left; font-size: 15px;">Enviado por alumno: {{MisMensajes.codigo_alumno}} </h2>
+                <p *ngFor = "let MisMensjes2 of MisMensjes2">Cuerpo del Mensaje: {{MisMensjes2.richtext}}
+                  
+                </p>
+                <p  *ngFor = "let MisMensjes2 of MisMensjes2">Archivo: {{MisMensjes2.archivo.type}}</p>
+                
+              </div>
+      </div>
+  </ion-card>
+  <ion-col width-50 style="text-align: center">
+      <button ion-button block (click)="accion3()" > <ion-icon name="close"></ion-icon>   Eliminar Mensajes </button>
+    </ion-col>
+       
+    <ion-card *ngIf="ocultar3">
+       
+       
+        <div class="boxContenedor">
+            <div class="container" >
+                <div class="row">
+                  <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                      <div class="card-body" style="background: greenyellow;">
+                        
+                        <form  class="form-signin" [formGroup]="DeleteRegisterForm" (ngSubmit) = "EliminarMensaje()" >
+                            <label for="inputEmail">ID Mensaje</label>
+                          <div class="form-label-group">
+                            <input required id="idMensaje" type="text"  formControlName="codigo_mensajes"  class="form-control" placeholder="idMensaje" name="idMensaje">
+                      
+                          </div>
+                      
+                        
+                               
+          
+                          <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!DeleteRegisterForm.valid" type="submit">Enviar Mensaje</button>
+                         
+                          <hr class="my-4">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+  
+        
+        
+            
+              
+    </ion-card>
+    
+      
+        
+     
+  </ion-row>
+          </div>
+  </body>
+      
+  </ion-content>
+  

@@ -1,0 +1,76 @@
+
+<button ion-button block (click)="accion1()" > Correos <ion-icon name="mail-unread"></ion-icon></button>
+  <ion-card *ngIf="ocultar1">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Titulo: Contraseña Generada</h4>
+        <p class="card-text" >Descripcion: Buenos dias Usuario lo saluda el administrador informandole que este correo se debe a que solicito una contraseña</p>
+        <p class="card-text" *ngFor = "let password of password"> Contraseña: {{password.password_}} </p>
+      </div>
+    </div>
+     <ion-card-content >
+   
+     </ion-card-content>
+  </ion-card>
+
+<ion-content>
+<body>
+  
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">LOGIN<ion-icon name="create"></ion-icon></h5>
+              <form class="form-signin" [formGroup]="loginForm"  (ngSubmit) = "iniciarSesion()" >
+                   <label for="inputEmail">Email address</label>
+                <div class="form-label-group">
+                  <input required id="usaurio" formControlName="correo_electronico" type="email" class="form-control" placeholder="Usuarios" name="usuario">
+                  <div *ngIf="loginForm.get('correo_electronico').invalid && (loginForm.get('correo_electronico').dirty || loginForm.get('correo_electronico').touched)">
+  
+                   <div class="alert alert-danger" role="alert" 
+                   *ngIf="loginForm.get('correo_electronico').errors && loginForm.get('correo_electronico').errors['required']">
+                    email is required  
+                   </div>
+                   
+                   <div class="alert alert-warning" role="alert" *ngIf="loginForm.get('correo_electronico').errors && loginForm.get('correo_electronico').errors['maxlength']">
+                      the lenght is maximun 80 characters 
+                     </div>
+                     
+                   </div>   
+                </div>
+                <label for="inputPassword" >Password</label>
+                
+                <div class="form-label-group" >                     
+                  <input  id="password_" formControlName="password_"type="password"  class="form-control" name="password_" placeholder="Password">
+                  <div *ngIf="loginForm.get('password_').invalid && (loginForm.get('password_').dirty || loginForm.get('password_').touched)">
+  
+                    <div class="alert alert-danger" role="alert" 
+                    *ngIf="loginForm.get('password_').errors && loginForm.get('password_').errors['required']">
+                     password is required  
+                    </div>
+                    
+                    <div class="alert alert-warning" role="alert" *ngIf="loginForm.get('password_').errors && loginForm.get('password_').errors['maxlength']">
+                        the lenght is maximun 80 characters 
+                       </div>
+                      
+                    </div>
+                </div>
+               
+  
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!loginForm.valid" type="submit">Sign in</button>
+                <div>
+                  <a class="d-block text-center mt-2 small" [routerLink]="['/registro-estudiantes']">Crear Cuenta</a>
+                  <a class="d-block text-center mt-2 small" [routerLink]="['/recuperar-password']">Olvidar Contraseña</a>
+                </div>
+                
+                <hr class="my-4">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</ion-content>

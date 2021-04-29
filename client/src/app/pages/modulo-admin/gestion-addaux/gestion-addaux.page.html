@@ -1,0 +1,145 @@
+<ion-header>
+    <ion-toolbar >
+      <ion-title ><h5 class="card-title text-center"><ion-icon name="keypad"></ion-icon>  Auxiliares </h5></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content >
+    
+      <body>
+          <div class="form-group" style="text-align: right;">        
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit"  [routerLink]="['/gestion-auxiliar']"  class="btn btn-primary">⬅ Regresar a la Gestion Auxiliar </button>
+              </div>
+          </div>
+          <ion-row>
+        <ion-col width-50 style="text-align: center">
+    <button ion-button block (click)="accion1()" > Crear Auxiliar </button>
+  </ion-col>
+     
+  <ion-card *ngIf="ocultar1">
+     
+     
+    
+        <div class="boxContenedor">
+    <div class="container" >
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body" style="background: greenyellow;">
+                <h5 style="text-align: center;">Crear Cursos</h5>
+              <form  class="form-signin"[formGroup]="CursosRegisterForm" (ngSubmit) = "crearAuxiliar()" >
+                   <label for="inputEmail">Codigo Estudiante</label>
+                <div class="form-label-group">
+                   <input required id="nombre" type="text"   formControlName="codigo_estudiante"  class="form-control" placeholder="Nombre" name="nombre">
+                   
+                </div>
+                <label for="inputEmail" >DPI</label>
+                
+                <div class="form-label-group" >                     
+                  <input  id="apellido" type="number"  class="form-control"  formControlName="carne" name="apellido" placeholder="Apellido">
+             
+                </div>
+    
+                
+               
+    
+    
+                <label for="inputEmail" >Password</label>
+                
+                <div class="form-label-group" >                     
+                  <input  id="correo_electronico" type="password"    formControlName="password_" class="form-control" name="correo_electronico" placeholder="correo_electronico">
+           
+                </div>
+               
+               
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!CursosRegisterForm.valid" type="submit">Crear Cursos</button>
+               <hr class="my-4">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+  
+    
+  </ion-card>
+  <ion-col width-50 style="text-align: center">
+      <button ion-button block (click)="accion2()" > Ver Auxiliares </button>
+    </ion-col>
+    <ion-card *ngIf="ocultar2">
+     
+     
+    
+        <div class="boxContenedor">
+            <h1 style="text-align: center;">Auxiliares</h1>
+            
+            <table class="table table-hover" style= "background: linear-gradient(to right, blue, magenta)">
+                <thead>
+                  <tr >
+                    <th scope="col">#ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Carnet</th>
+                    <th scope="col">Rol</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor = "let allAuxiliar of allAuxiliar">
+                      <td>{{allAuxiliar.codigo_estudiante}}</td>
+                      <td>{{allAuxiliar.nombre}}</td>
+                      <td>{{allAuxiliar.apellido}}</td>
+                      <td>{{allAuxiliar.carne}}</td>
+                      <td *ngIf="allAuxiliar.rol == 3">Auxiliar</td>
+                     
+                  </tr>
+                  
+                </tbody>
+              </table>
+        </div>
+  </ion-card>
+  
+    
+    <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion4()" > Buscar Estudiantes </button>
+      </ion-col>
+         
+      <ion-card *ngIf="ocultar4">
+         
+         
+        
+            <div class="boxContenedor">
+                <h1 style="text-align: center;">Estudiantes</h1>
+                
+                <table class="table table-hover" style= "background: linear-gradient(to right, blue, magenta)">
+                    <thead>
+                      <tr >
+                        <th scope="col">#ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Carnet</th>
+                        <th scope="col">Rol</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor = "let allStudents of allStudents">
+                          <td>{{allStudents.codigo_estudiante}}</td>
+                          <td>{{allStudents.nombre}}</td>
+                          <td>{{allStudents.apellido}}</td>
+                          <td>{{allStudents.carne}}</td>
+                          <td *ngIf="allStudents.rol == 2">Estudiante</td>
+                         
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+            </div>
+      
+        
+      </ion-card>
+  </ion-row>
+  </body>
+      
+  </ion-content>
+  

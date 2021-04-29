@@ -1,0 +1,60 @@
+<ion-header>
+  
+  <ion-toolbar>
+  
+    <ion-title style="border: 3px solid red; background: yellow;">
+     
+       
+        <div class="sidebar-logo" >
+            <div class="peers ai-c fxw-nw" >
+              <div class="peer peer-greed" style="text-align: center;">
+                <img style="border-radius: 50%; border: 3px solid red; background: black;" width="75" height="75" src="https://www.usac.edu.gt/img/logo_rectoria.png" alt="">
+              </div>
+              <div class="peer peer-greed">
+                  <h5 class="lh-1 mB-0 logo-text"style="text-align: center;">Modulo Administrador</h5>
+                </div>
+              <div class="peer peer-greed">
+                  <h5 class="lh-1 mB-0 logo-text"style="text-align: center;"> {{hora.toLocaleString()}}</h5>
+                <h5 class="lh-1 mB-0 logo-text"style="text-align: center;"> Bienvenido Administrador {{data.Nombre}}</h5>
+              </div>
+              <div class="peer">
+                <div class="mobile-toggle sidebar-toggle">
+                  <a href="" class="td-n">
+                    <i class="ti-arrow-circle-left"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+    </ion-title>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark justify-content-center">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link"    [routerLink]="['/gestion-cursos']" >Gestion Cursos <ion-icon name="today"></ion-icon></a>
+              </li>
+          <li class="nav-item active">
+            <a class="nav-link"    [routerLink]="['/gestion-auxiliar']" >Gestion Auxiliar <ion-icon name="contacts"></ion-icon></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/gestion-reportes']">Reportes <ion-icon name="book"></ion-icon> </a>
+          </li>
+        
+          
+          
+          <li class="nav-item active" >
+              <a class="nav-link" href="#" (click)="logOut()" >
+                  <i class="ti-power-off mR-10"></i>
+                  <span>Cerrar Sesión <ion-icon name="log-out"></ion-icon></span>
+          </a>
+            </li>
+           
+        </ul>
+      </nav>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="border: 3px solid red; background: blue;">
+  
+</ion-content>
+     

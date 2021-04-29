@@ -1,0 +1,130 @@
+<ion-header>
+    <ion-toolbar >
+      <ion-title ><h5 class="card-title text-center"><ion-icon name="keypad"></ion-icon>  Preguntas </h5></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content >
+    
+      <body>
+          <div class="boxContenedor">
+          <div class="form-group" style="text-align: right;">        
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit"  [routerLink]="['/inicio-estudiante']"  class="btn btn-primary">⬅ Regresar a la Gestion de Cursos </button>
+              </div>
+          </div>
+      
+         
+         
+        
+        
+                <h1 style="text-align: center;">Mis Preguntas</h1>
+                
+                <table class="table table-hover" style= "background: linear-gradient(to right, blue, magenta)">
+                  
+                   
+                  <thead>
+                      <tr>
+                        <th scope="col">#ID Pregunta</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Pregunta</th>
+                        <th scope="col">Respuesta1</th>
+                        <th scope="col">Respuesta2</th>
+                        <th scope="col">Respuesta3</th>
+               
+                        <th scope="col">Punteo</th>
+                        <th scope="col">Codigo Evaluacion</th>
+                     
+
+                      </tr>
+                    </thead>
+               
+                    <tbody *ngFor = "let Intento1 of Intento1">
+                     
+                        <tr >
+                            <td>{{Intento1.codigo_pregunta}}</td>
+                            <td>{{Intento1.tipo}}</td>
+                            <td>{{Intento1.pregunta}}</td>
+                            <td>{{Intento1.respuesta1}}</td>
+                            <td>{{Intento1.respuesta2}}</td>
+                            <td>{{Intento1.respuesta3}}</td>       
+                           <td>{{Intento1.punteo}}</td>
+                           <td>{{Intento1.codigo_evaluacion}}</td>
+                          </tr>
+                     
+                    </tbody>
+                 
+                  </table>
+              
+                  
+    <button ion-button block (click)="accion1()" > Realizar Evaluacion <ion-icon name="book"></ion-icon></button>
+    <ion-card *ngIf="ocultar1">
+      <div class="card">
+        <div class="card-body">
+            <h1 class="card-title" style="text-align: center;">Respuesta </h1>
+        
+          <h3 class="card-text">Descripcion: El estudiante debe de insertar una respuesta para la pregunta mostrada</h3>
+        </div>
+   
+       <ion-card-content >
+          <div class="container" >
+              <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                  <div class="card card-signin my-5">
+                    <div class="card-body" style="background: yellow;">
+                        <h5 style="text-align: center;">Editar Cursos</h5>
+                      <form  class="form-signin"  [formGroup]="CursosRegisterForm" (ngSubmit) = "crearEvaluaciones()" >
+                         
+          
+                          <label for="inputEmail" >Respuesta</label>
+                          
+                          <div class="form-label-group" >                     
+                            <input  id="apellido" type="text"  class="form-control"  formControlName="respuesta" name="apellido" placeholder="Apellido">
+                       
+                          </div>
+                          <label for="inputEmail" >Codigo Pregunta</label>
+                          
+                          <div class="form-label-group" >                     
+                            <input  id="apellido" type="text"  class="form-control"  formControlName="codigo_pregunta" name="apellido" placeholder="Apellido">
+                       
+                          </div>
+          
+                          <label for="inputEmail" >Evaluacion</label>
+                          
+                          <div class="form-label-group" >                     
+                            <input  id="apellido" type="text"  class="form-control"  formControlName="codigo_evaluacion" name="apellido" placeholder="Apellido">
+                       
+                          </div>
+                          <label for="inputEmail" >Punteo</label>
+                          
+                          <div class="form-label-group" >                     
+                            <input  id="apellido" type="number"  step="any" class="form-control"  formControlName="punteo" name="apellido" placeholder="Apellido">
+                       
+                          </div>
+                        
+              
+              
+                          <label for="inputEmail">Estudiante</label>
+                          
+                          <div class="form-label-group" >                     
+                            <input  id="correo_electronico" type="text"    formControlName="codigo_estudiante" class="form-control" name="correo_electronico" placeholder="correo_electronico">
+                     
+                          </div>
+                         
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase"[disabled]="!CursosRegisterForm.valid" type="submit">Actualizar Cursos</button>
+                       <hr class="my-4">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+       </ion-card-content>
+      </div>
+    </ion-card>
+        
+          </div>
+  </body>
+      
+  </ion-content>
+  

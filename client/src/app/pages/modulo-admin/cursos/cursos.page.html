@@ -1,0 +1,210 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title ><h5 class="card-title text-center"><ion-icon name="keypad"></ion-icon>  Cursos </h5></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  
+    <body>
+        <div class="form-group" style="text-align: right;">        
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit"  [routerLink]="['/gestion-cursos']"  class="btn btn-primary">⬅ Regresar a la Gestion de Cursos </button>
+            </div>
+        </div>
+        <ion-row>
+      <ion-col width-50 style="text-align: center">
+  <button ion-button block (click)="accion1()" > Crear Cursos </button>
+</ion-col>
+   
+<ion-card *ngIf="ocultar1">
+   
+   
+  
+      <div class="boxContenedor">
+  <div class="container" >
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body" style="background: greenyellow;">
+              <h5 style="text-align: center;">Crear Cursos</h5>
+            <form  class="form-signin" [formGroup]="CursosRegisterForm" (ngSubmit) = "crearCusos()" >
+                 <label for="inputEmail">Nombre</label>
+              <div class="form-label-group">
+                 <input required id="nombre" type="text"   formControlName="nombre"  class="form-control" placeholder="Nombre" name="nombre">
+                 
+              </div>
+              <label for="inputEmail" >Descripcion</label>
+              
+              <div class="form-label-group" >                     
+                <input  id="apellido" type="text"  class="form-control"  formControlName="descripcion" name="apellido" placeholder="Apellido">
+           
+              </div>
+  
+              
+              <div class="form-group">
+                  <label for="inputEmail" >Estado</label>
+                  <div class="col-sm-10">           
+                    
+                    <select class="form-control" id="inlineFormInputGroup" placeholder="Estado" formControlName="estado" name="estado" >
+                      <option value="0">Deshabilitado</option>
+                      <option value="1">Habilitado</option>
+                    </select>
+             
+                  </div>
+              </div>
+  
+  
+              <label for="inputEmail" >Codigo Unico</label>
+              
+              <div class="form-label-group" >                     
+                <input  id="correo_electronico" type="text"    formControlName="codigo_unico" class="form-control" name="correo_electronico" placeholder="correo_electronico">
+         
+              </div>
+             
+             
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!CursosRegisterForm.valid" type="submit">Crear Cursos</button>
+             <hr class="my-4">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+
+  
+</ion-card>
+<ion-col width-50 style="text-align: center">
+    <button ion-button block (click)="accion2()" > Eliminar Cursos </button>
+  </ion-col>
+  <ion-card *ngIf="ocultar2">
+   
+   
+  
+      <div class="boxContenedor">
+  <div class="container" >
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body" style="background: mediumspringgreen;">
+            <h5 style="text-align: center;">Eliminar Cursos</h5>
+            <form  class="form-signin" [formGroup]="DeleteRegisterForm" (ngSubmit) = "EliminarCursos()" >
+                 <label for="inputEmail">Codigo del Cursos</label>
+              <div class="form-label-group">
+                 <input required id="id" type="number" formControlName="codigo_curso1"   class="form-control" placeholder="id" name="id">
+                 
+              </div>
+             
+              
+              <button class="btn btn-lg btn-primary btn-block text-uppercase"[disabled]="!DeleteRegisterForm.valid" type="submit">Eliminar Cursos</button>
+             <hr class="my-4">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+</ion-card>
+<ion-col width-50 style="text-align: center">
+    <button ion-button block (click)="accion3()" > Editar Cursos </button>
+  </ion-col>
+     
+  <ion-card *ngIf="ocultar3">
+     
+     
+    
+        <div class="boxContenedor">
+    <div class="container" >
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body" style="background: yellow;">
+                <h5 style="text-align: center;">Editar Cursos</h5>
+              <form  class="form-signin"  [formGroup]="UpdateRegisterForm" (ngSubmit) = "UpdateCursos()" >
+                   <label for="inputEmail">ID</label>
+                <div class="form-label-group">
+                   <input required id="id" type="text"  formControlName="codigo_curso"  class="form-control" placeholder="id" name="id">
+                   
+                </div>
+                <label for="inputEmail" >Nombre</label>
+                
+                <div class="form-label-group" >                     
+                  <input  id="nombre" type="text"  class="form-control" formControlName="nombre" name="nombre" placeholder="nombre">
+             
+                </div>
+    
+                <label for="inputEmail" >Descripcion</label>
+                
+                <div class="form-label-group" >                     
+                  <input  id="descripcion" type="text"    class="form-control" formControlName="descripcion" name="descripcion" placeholder="descripcion">
+           
+                </div>
+    
+    
+                <div class="form-group">
+                    <label for="inputEmail" >Estado</label>
+                    <div class="col-sm-10">           
+                      
+                      <select class="form-control" id="inlineFormInputGroup" placeholder="Estado" formControlName="estado" name="estado" >
+                        <option value="0">Deshabilitado</option>
+                        <option value="1">Habilitado</option>
+                      </select>
+               
+                    </div>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase"[disabled]="!UpdateRegisterForm.valid" type="submit">Actualizar Cursos</button>
+               <hr class="my-4">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+  
+    
+  </ion-card>
+  <ion-col width-50 style="text-align: center">
+      <button ion-button block (click)="accion4()" > Ver Cursos </button>
+    </ion-col>
+       
+    <ion-card *ngIf="ocultar4">
+       
+       
+      
+          <div class="boxContenedor">
+              <h1 style="text-align: center;">Mis Cursos</h1>
+              
+              <table class="table table-hover" style= "background: linear-gradient(to right, blue, magenta)">
+                  <thead>
+                    <tr>
+                      <th scope="col">#ID</th>
+                      <th scope="col">Codigo Curso</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Descripcion</th>
+                      <th scope="col">Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor = "let allCursos of allCursos">
+                      <td>{{allCursos.codigo_curso}}</td>
+                      <td>{{allCursos.codigo_unico}}</td>
+                      <td>{{allCursos.nombre}}</td>
+                      <td>{{allCursos.descripcion}}</td>
+                      <td *ngIf="allCursos.estado == 0">inhabilitado</td>
+                     <td *ngIf="allCursos.estado == 1">Habilitado</td>
+                      
+                    </tr>
+                    
+                  </tbody>
+                </table>
+          </div>
+    
+      
+    </ion-card>
+</ion-row>
+</body>
+    
+</ion-content>
