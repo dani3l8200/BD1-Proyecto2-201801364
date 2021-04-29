@@ -22,6 +22,28 @@ left join pais pp on f.check_frontera = pp.id_pais
 where i.id_pais is null and pp.id_pais is null
 order by p.area_km2 desc;
 
+
+create or replace view jefes_de_area as select * from ( select distinct 
+(select id_profesional from profesional where nombre = t.profesional_asg_al_invento) as id_profesional,
+(select id_area from area where area = t.prof_es_jefe_del_area) as id_area
+from temporal1 t
+where t.invento != '' and t.prof_es_jefe_del_area != '' and t.prof_es_jefe_del_area != 'TODAS')x;
+
+create or replace view profesional_area as select * from (select distinct 
+(select id_profesional from profesional where nombre = t.profesional_asg_al_invento) as id_profesional,
+(select id_area from area where area = t.area_invest_prof) as id_area
+from temporal1 t
+where t.invento != '') x;
+
+/*Consulta 4*/
+select p.nombre 'Jefe Area', p1.nombre 'Subordinado', a.area 'Area'
+from profesional_area pa 
+inner join area a on pa.id_area = a.id_area 
+inner join jefes_de_area ja on ja.id_area = a.id_area
+inner join profesional p on ja.id_profesional = p.id_profesional
+inner join profesional p1 on pa.id_profesional = p1.id_profesional
+order by 'Jefe Area';
+
 /*Consulta #5*/
 create or replace view promedios as select * from
 (
@@ -108,7 +130,45 @@ where p.poblacion > (
 );
 
 /*Consulta 16*/
+create or replace view c1 as select * from (
+(select distinct p.id_profesional as id_profesional, a.id_area, 0 is_jefe 
+from temporal1 t 
+inner join profesional p on p.nombre = t.profesional_asg_al_invento
+inner join area a on a.area = t.area_invest_prof
+where t.area_invest_prof != '')
+UNION 
+(select distinct p.id_profesional as id_profesional, a.id_area, 1 is_jefe 
+from temporal1 t 
+inner join profesional p on p.nombre = t.profesional_asg_al_invento
+inner join area a on a.area = t.prof_es_jefe_del_area
+where t.prof_es_jefe_del_area != '')
+) x; 
 
+create or replace view c2 as select * from (
+select * from c1 
+UNION
+(select distinct p.id_profesional as id_profesional, a.id_area, 1 is_jefe 
+from temporal1 t 
+inner join profesional p on p.nombre = t.profesional_asg_al_invento,
+area a 
+where t.prof_es_jefe_del_area = 'TODAS' and 
+not exists (select * from c1 where id_profesional = p.id_profesional and id_area = a.id_area))
+) x;
+
+select p.nombre, a.area from c2 pa 
+inner join profesional p on pa.id_profesional = p.id_profesional
+inner join area a on a.id_area = pa.id_area
+where pa.is_jefe = 1 and
+a.area != (
+	select a.area from profesional p
+    inner join asg_invento ai on p.id_profesional = ai.id_profesional
+    inner join invento i on i.id_invento = ai.id_invento
+    inner join inventado inve on inve.id_invento = i.id_invento
+    inner join inventor inv on inv.id_inventor = inve.id_inventor
+    inner join c2 pa on pa.id_profesional = p.id_profesional
+    inner join area a on a.id_area = pa.id_area
+    where inv.nombre = 'Pasteur'
+);
 /*Consulta 17*/
 select nombre, anio_invento from invento 
 where anio_invento = (
