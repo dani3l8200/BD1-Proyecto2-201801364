@@ -1,9 +1,56 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>consulta11</ion-title>
+    <ion-title
+      ><h5 class="card-title text-center">
+        <ion-icon name="keypad"></ion-icon> Consulta 11
+      </h5></ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <body>
+    <div class="boxContenedor">
+      <div class="form-group" style="text-align: right">
+        <div class="col-sm-offset-2 col-sm-12">
+          <button
+            type="submit"
+            [routerLink]="['/inicio-admin']"
+            class="btn btn-primary"
+          >
+            ⬅ Regresar al Modulo Admin
+          </button>
+        </div>
+      </div>
 
+      <h1 style="text-align: center">Consulta 11</h1>
+      <h2 style="text-align: center">{{date}}</h2>
+      <table
+        class="table table-hover"
+        style="background: linear-gradient(to right, rgb(229, 255, 0), rgb(0, 162, 255))"
+      >
+        <thead>
+          <tr>
+            <th style="text-align: center" scope="col">Pias</th>
+            <th style="text-align: center" scope="col">Area (KM^2)</th>
+            <th style="text-align: center" scope="col">Cantidad Fronteras</th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let consulta11 of consulta11">
+          <tr>
+            <td style="text-align: center">
+              {{consulta11.pais}}
+            </td>
+            <td style="text-align: center">
+              {{consulta11.area_km2}}
+            </td>
+            <td style="text-align: center">
+              {{consulta11.num_front}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
 </ion-content>

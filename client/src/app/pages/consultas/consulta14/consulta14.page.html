@@ -1,9 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>consulta14</ion-title>
+    <ion-title
+      ><h5 class="card-title text-center">
+        <ion-icon name="keypad"></ion-icon> Consulta 14
+      </h5></ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <body>
+    <div class="boxContenedor">
+      <div class="form-group" style="text-align: right">
+        <div class="col-sm-offset-2 col-sm-12">
+          <button
+            type="submit"
+            [routerLink]="['/inicio-admin']"
+            class="btn btn-primary"
+          >
+            ⬅ Regresar al Modulo Admin
+          </button>
+        </div>
+      </div>
 
+      <h1 style="text-align: center">Consulta 14</h1>
+      <h2 style="text-align: center">{{date}}</h2>
+      <table
+        class="table table-hover"
+        style="background: linear-gradient(to right, rgb(229, 255, 0), rgb(60, 255, 0))"
+      >
+        <thead>
+          <tr>
+            <th style="text-align: center" scope="col">Encuesta</th>
+            <th style="text-align: center" scope="col">No. Respuestas</th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let consulta14 of consulta14">
+          <tr>
+            <td style="text-align: center">
+              {{consulta14.encuesta}}
+            </td>
+            <td style="text-align: center">
+              {{consulta14.resp_pais}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
 </ion-content>
