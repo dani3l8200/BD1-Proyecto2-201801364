@@ -191,6 +191,71 @@ app.get("/consulta20", (req, res) => {
 });
 /******************************************************************************************************************************/
 /************************************************************CRUD**************************************************************/
+app.post("/addFrontera", (req, res) => {
+  const id_pais = req.body.id_pais;
+  const check_frontera = req.body.check_frontera;
+  const norte = req.body.norte;
+  const sur = req.body.sur;
+  const este = req.body.este;
+  const oeste = req.body.oeste;
+  const query = `insert into frontera(id_pais, check_frontera, norte, sur, este, oeste) 
+  values ('${id_pais}', '${check_frontera}', '${norte}', '${sur}', '${este}', '${oeste}');`;
+  conexion.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+app.get("/getFronteras", (req, res) => {
+  const query = `select fr.id_frontera, p.id_pais, p.pais, pp.id_pais as id_frontera_pais,
+  pp.pais as frontera, fr.sur, fr.norte, fr.este, fr.oeste from frontera fr
+  inner join pais p on p.id_pais = fr.id_pais
+  inner join pais pp on pp.id_pais = fr.check_frontera
+  order by fr.id_frontera;`;
+  conexion.query(query, (err, result) => {
+    if (err) throw err;
+    else res.send(result);
+  });
+});
+
+app.delete("/removeFrontera/:id_frontera", (req, res) => {
+  const id_frontera = req.params.id_frontera;
+  const query = `delete from frontera where id_frontera = '${id_frontera}';`;
+  conexion.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+app.put("/updateFronteras/:id_frontera", (req, res) => {
+  const id_frontera = req.params.id_frontera;
+  const id_pais = req.body.id_pais;
+  const check_frontera = req.body.check_frontera;
+  const norte = req.body.norte;
+  const sur = req.body.sur;
+  const este = req.body.este;
+  const oeste = req.body.oeste;
+  const query = `update frontera set id_pais = '${id_pais}', check_frontera = '${check_frontera}', 
+  norte = '${norte}', sur = '${sur}', este = '${este}', oeste = '${oeste}' 
+  where id_frontera = '${id_frontera}';`;
+  conexion.query(query, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
 app.post("/addPais", (req, res) => {
   const pais = req.body.pais;
   const capital = req.body.capital;
@@ -209,7 +274,7 @@ app.post("/addPais", (req, res) => {
 });
 
 app.get("/getPaises", (req, res) => {
-  const query = `select p.id_pais as id, p.pais, p.capital, p.poblacion, p.area_km2, r.region from pais p 
+  const query = `select p.id_pais as id, p.pais, p.capital, p.poblacion, p.area_km2, r.id_region, r.region from pais p 
   inner join region r on p.id_region = r.id_region
   order by p.id_pais asc;`;
   conexion.query(query, (err, result) => {
@@ -315,7 +380,7 @@ app.get("/getInventores", (req, res) => {
   });
 });
 
-app.put("/updatePregunta", (req, res) => {
+app.put("/updateInventos", (req, res) => {
   const id_invento = req.body.id_invento;
   const inventor = req.body.inventor;
   const invento = req.body.invento;
@@ -341,7 +406,7 @@ app.put("/updatePregunta", (req, res) => {
 });
 
 app.get("/getRespuestas", (req, res) => {
-  const query = `select p.id_pregunta as id, p.pregunta, r.respuesta from resp_corr res 
+  const query = `select p.id_pregunta as id, p.pregunta, r.id_respuesta, r.respuesta from resp_corr res 
   inner join pregunta p on p.id_pregunta = res.id_pregunta
   inner join respuesta r on r.id_respuesta = res.id_respuesta
   order by p.id_pregunta asc;`;

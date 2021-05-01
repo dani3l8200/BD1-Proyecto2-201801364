@@ -1,0 +1,260 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <h5 class="card-title text-center">
+        <ion-icon name="keypad"></ion-icon> Inventos/Inventores
+      </h5></ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <body>
+    <div class="form-group" style="text-align: right">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button
+          type="submit"
+          [routerLink]="['/inicio-admin']"
+          class="btn btn-primary"
+        >
+          ⬅ Regresar al Modulo Admin
+        </button>
+      </div>
+    </div>
+    <h2 style="text-align: center">{{date}}</h2>
+    <ion-row>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion1()">
+          Actualizar Inventos
+        </button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar1">
+        <div class="boxContenedor">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: greenyellow">
+                    <h5 style="text-align: center">Actualizar Inventos</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="InventoresUpdateRegisterForm"
+                      (ngSubmit)="UpdateInventores()"
+                    >
+                      <label for="inputEmail">ID Invento</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id_invento"
+                          type="number"
+                          formControlName="id_invento"
+                          class="form-control"
+                          placeholder="id_invento"
+                          name="id_invento"
+                        />
+                      </div>
+                      <label for="inputEmail">Inventor</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="inventor"
+                          type="text"
+                          class="form-control"
+                          formControlName="inventor"
+                          name="inventor"
+                          placeholder="inventor"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Invento</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="invento"
+                          type="text"
+                          class="form-control"
+                          formControlName="invento"
+                          name="invento"
+                          placeholder="invento"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Año Invento</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="anio_invento"
+                          type="number"
+                          class="form-control"
+                          formControlName="anio_invento"
+                          name="anio_invento"
+                          placeholder="anio_invento"
+                        />
+                      </div>
+
+                      <label for="inputEmail">ID Inventor</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="id_inventor"
+                          type="number"
+                          class="form-control"
+                          formControlName="id_inventor"
+                          name="id_inventor"
+                          placeholder="id_inventor"
+                        />
+                      </div>
+
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!InventoresUpdateRegisterForm.valid"
+                        type="submit"
+                      >
+                        Actualizar Invento
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion2()">Ver Inventos</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar2">
+        <div class="scrollable-menu">
+          <h1 style="text-align: center">Inventos</h1>
+
+          <table
+            class="table table-hover"
+            style="
+              background: linear-gradient(to right, rgb(43, 255, 0), magenta);
+            "
+          >
+            <thead>
+              <tr>
+                <th scope="col">#ID Invento</th>
+                <th scope="col">Invento</th>
+                <th scope="col">Año Invento</th>
+                <th scope="col">#ID Inventor</th>
+                <th scope="col">Inventor</th>
+                <th scope="col">Pais</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inventos of inventos">
+                <td>{{inventos.id_invento}}</td>
+                <td>{{inventos.invento}}</td>
+                <td>{{inventos.anio_invento}}</td>
+                <td>{{inventos.id_inventor}}</td>
+                <td>{{inventos.inventor}}</td>
+                <td>{{inventos.pais}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card>
+
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion3()">Editar Respuestas</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar3">
+        <div class="boxContenedor">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: yellow">
+                    <h5 style="text-align: center">Editar Respuestas</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="AnswerUpdateRegisterForm"
+                      (ngSubmit)="updateAnswers()"
+                    >
+                      <label for="inputEmail">ID Pregunta</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id_pregunta"
+                          type="number"
+                          formControlName="id_pregunta"
+                          class="form-control"
+                          placeholder="id_pregunta"
+                          name="id_pregunta"
+                        />
+                      </div>
+                      <label for="inputEmail">ID Respuesta</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="id_respuesta"
+                          type="number"
+                          class="form-control"
+                          formControlName="id_respuesta"
+                          name="id_respuesta"
+                          placeholder="id_respuesta"
+                        />
+                      </div>
+
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!AnswerUpdateRegisterForm.valid"
+                        type="submit"
+                      >
+                        Actualizar Respuestas
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion4()">Ver Respuestas</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar4">
+        <div class="scrollable-menu">
+          <h1 style="text-align: center">Respuestas</h1>
+
+          <table
+            class="table table-hover"
+            style="
+              background: linear-gradient(
+                to right,
+                rgb(255, 230, 0),
+                rgb(115, 255, 0)
+              );
+            "
+          >
+            <thead>
+              <tr>
+                <th scope="col">#ID Pregunta</th>
+                <th scope="col">Pregunta</th>
+                <th scope="col">#ID Respuesta</th>
+                <th scope="col">Respuesta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let respuestas of respuestas">
+                <td>{{respuestas.id}}</td>
+                <td>{{respuestas.pregunta}}</td>
+                <td>{{respuestas.id_respuesta}}</td>
+                <td>{{respuestas.respuesta}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card>
+    </ion-row>
+  </body>
+</ion-content>

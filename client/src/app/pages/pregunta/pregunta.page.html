@@ -1,0 +1,235 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <h5 class="card-title text-center">
+        <ion-icon name="keypad"></ion-icon> Preguntas
+      </h5></ion-title
+    >
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <body>
+    <div class="form-group" style="text-align: right">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button
+          type="submit"
+          [routerLink]="['/inicio-admin']"
+          class="btn btn-primary"
+        >
+          ⬅ Regresar al Modulo Admin
+        </button>
+      </div>
+    </div>
+    <h2 style="text-align: center">{{date}}</h2>
+    <ion-row>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion1()">Crear Preguntas</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar1">
+        <div class="boxContenedor">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: greenyellow">
+                    <h5 style="text-align: center">Crear Cursos</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="PreguntaRegisterForm"
+                      (ngSubmit)="crearPreguntas()"
+                    >
+                      <label for="inputEmail">Pregunta</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="pregunta"
+                          type="text"
+                          formControlName="pregunta"
+                          class="form-control"
+                          placeholder="Pregunta"
+                          name="pregunta"
+                        />
+                      </div>
+                      <label for="inputEmail">ID Encuesta</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="id_encuesta"
+                          type="number"
+                          class="form-control"
+                          formControlName="id_encuesta"
+                          name="id_encuesta"
+                          placeholder="ID Encuesta"
+                        />
+                      </div>
+
+                     
+
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!PreguntaRegisterForm.valid"
+                        type="submit"
+                      >
+                        Crear Preguntas
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion2()">Eliminar Preguntas</button>
+      </ion-col>
+      <ion-card *ngIf="ocultar2">
+        <div class="boxContenedor">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: mediumspringgreen">
+                    <h5 style="text-align: center">Eliminar Preguntas</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="DeleteRegisterForm"
+                      (ngSubmit)="EliminarPreguntas()"
+                    >
+                      <label for="inputEmail">ID Pregunta</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id_pregunta"
+                          type="number"
+                          formControlName="id_pregunta"
+                          class="form-control"
+                          placeholder="id_pregunta"
+                          name="id_pregunta"
+                        />
+                      </div>
+
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!DeleteRegisterForm.valid"
+                        type="submit"
+                      >
+                        Eliminar Preguntas
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion3()">Editar Preguntas</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar3">
+        <div class="boxContenedor">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: yellow">
+                    <h5 style="text-align: center">Editar Preguntas</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="UpdateRegisterForm"
+                      (ngSubmit)="UpdatePreguntas()"
+                    >
+                      <label for="inputEmail">ID Pregunta</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id"
+                          type="number"
+                          formControlName="id"
+                          class="form-control"
+                          placeholder="id"
+                          name="id"
+                        />
+                      </div>
+                      <label for="inputEmail">Pregunta</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="pregunta"
+                          type="text"
+                          class="form-control"
+                          formControlName="pregunta"
+                          name="pregunta"
+                          placeholder="pregunta"
+                        />
+                      </div>
+
+                      <label for="inputEmail">ID Encuesta</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="id_encuesta"
+                          type="number"
+                          class="form-control"
+                          formControlName="id_encuesta"
+                          name="id_encuesta"
+                          placeholder="id_encuesta"
+                        />
+                      </div>
+
+                    
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!UpdateRegisterForm.valid"
+                        type="submit"
+                      >
+                        Actualizar Preguntas
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion4()">Ver Preguntas</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar4">
+        <div class="scrollable-menu">
+          <h1 style="text-align: center">Preguntas</h1>
+
+          <table
+            class="table table-hover"
+            style="background: linear-gradient(to right, rgb(43, 255, 0), magenta)"
+          >
+            <thead>
+              <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Pregunta</th>
+                <th scope="col">Encuesta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let preguntas of preguntas">
+                <td>{{preguntas.id}}</td>
+                <td>{{preguntas.pregunta}}</td>
+                <td>{{preguntas.encuesta}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card>
+    </ion-row>
+  </body>
+</ion-content>

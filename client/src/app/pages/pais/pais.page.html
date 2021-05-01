@@ -1,0 +1,637 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <h5 class="card-title text-center">
+        <ion-icon name="keypad"></ion-icon> Paises/Fronteras
+      </h5></ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <body>
+    <div class="form-group" style="text-align: right">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button
+          type="submit"
+          [routerLink]="['/inicio-admin']"
+          class="btn btn-primary"
+        >
+          ⬅ Regresar al Modulo Admin
+        </button>
+      </div>
+    </div>
+    <h2 style="text-align: center">{{date}}</h2>
+    <ion-row>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion1()">Crear Paises</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar1">
+        <div class="boxContenedor">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: greenyellow">
+                    <h5 style="text-align: center">Crear Paises</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="PaisRegisterForm"
+                      (ngSubmit)="crearPaises()"
+                    >
+                      <label for="inputEmail">Pais</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="pais"
+                          type="text"
+                          formControlName="pais"
+                          class="form-control"
+                          placeholder="Pais"
+                          name="pais"
+                        />
+                      </div>
+                      <label for="inputEmail">Capital</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="capital"
+                          type="text"
+                          class="form-control"
+                          formControlName="capital"
+                          name="capital"
+                          placeholder="Capital"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Poblacion</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="poblacion"
+                          type="number"
+                          class="form-control"
+                          formControlName="poblacion"
+                          name="poblacion"
+                          placeholder="Poblacion"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Area (KM^2)</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="area_km2"
+                          type="number"
+                          class="form-control"
+                          formControlName="area_km2"
+                          name="area_km2"
+                          placeholder="Area (KM^2)"
+                        />
+                      </div>
+
+                      <label for="inputEmail">ID Region</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="id_region"
+                          type="number"
+                          class="form-control"
+                          formControlName="id_region"
+                          name="id_region"
+                          placeholder="ID Region"
+                        />
+                      </div>
+
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!PaisRegisterForm.valid"
+                        type="submit"
+                      >
+                        Crear Paises
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion2()">Eliminar Paises</button>
+      </ion-col>
+      <ion-card *ngIf="ocultar2">
+        <div class="boxContenedor">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: mediumspringgreen">
+                    <h5 style="text-align: center">Eliminar Paises</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="PaisDeleteRegisterForm"
+                      (ngSubmit)="EliminarPaises()"
+                    >
+                      <label for="inputEmail">ID Pais</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id_pais"
+                          type="number"
+                          formControlName="id_pais"
+                          class="form-control"
+                          placeholder="ID Pais"
+                          name="id_pais"
+                        />
+                      </div>
+
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!PaisDeleteRegisterForm.valid"
+                        type="submit"
+                      >
+                        Eliminar Preguntas
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion3()">Editar Paises</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar3">
+        <div class="boxContenedor">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: yellow">
+                    <h5 style="text-align: center">Editar Paises</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="PaisUpdateRegisterForm"
+                      (ngSubmit)="UpdatePaises()"
+                    >
+                      <label for="inputEmail">ID Pais</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="id_pais"
+                          type="number"
+                          class="form-control"
+                          formControlName="id_pais"
+                          name="id_pais"
+                          placeholder="ID Pais"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Pais</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="pais"
+                          type="text"
+                          formControlName="pais"
+                          class="form-control"
+                          placeholder="Pais"
+                          name="pais"
+                        />
+                      </div>
+                      <label for="inputEmail">Capital</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="capital"
+                          type="text"
+                          class="form-control"
+                          formControlName="capital"
+                          name="capital"
+                          placeholder="Capital"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Poblacion</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="poblacion"
+                          type="number"
+                          class="form-control"
+                          formControlName="poblacion"
+                          name="poblacion"
+                          placeholder="Poblacion"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Area (KM^2)</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="area_km2"
+                          type="number"
+                          class="form-control"
+                          formControlName="area_km2"
+                          name="area_km2"
+                          placeholder="Area (KM^2)"
+                        />
+                      </div>
+
+                      <label for="inputEmail">ID Region</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="id_region"
+                          type="number"
+                          class="form-control"
+                          formControlName="id_region"
+                          name="id_region"
+                          placeholder="ID Region"
+                        />
+                      </div>
+
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!PaisUpdateRegisterForm.valid"
+                        type="submit"
+                      >
+                        Actualizar Preguntas
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center">
+        <button ion-button block (click)="accion4()">Ver Paises</button>
+      </ion-col>
+
+      <ion-card *ngIf="ocultar4">
+        <div class="boxContenedor">
+          <h1 style="text-align: center">Paises</h1>
+
+          <table
+            class="table table-hover"
+            style="
+              background: linear-gradient(to right, rgb(43, 255, 0), magenta);
+            "
+          >
+            <thead>
+              <tr>
+                <th scope="col">#ID Pais</th>
+                <th scope="col">Pais</th>
+                <th scope="col">Capital</th>
+                <th scope="col">Poblacion</th>
+                <th scope="col">Area KM^2</th>
+                <th scope="col">#ID Region</th>
+                <th scope="col">Region</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let paises of paises">
+                <td>{{paises.id}}</td>
+                <td>{{paises.pais}}</td>
+                <td>{{paises.capital}}</td>
+                <td>{{paises.poblacion}}</td>
+                <td>{{paises.area_km2}}</td>
+                <td>{{paises.id_region}}</td>
+                <td>{{paises.region}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card>
+    </ion-row>
+
+    <ion-row justify-content-center>
+      <ion-col width-50 style="text-align: center; margin-top: 3cm">
+        <button ion-button block (click)="accion5()">Crear Fronteras</button>
+      </ion-col>
+      <ion-card *ngIf="ocultar5">
+        <div class="scrollable-menu">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: greenyellow">
+                    <h5 style="text-align: center">Crear Fronteras</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="FronteraRegisterForm"
+                      (ngSubmit)="crearFronteras()"
+                    >
+                      <label for="inputEmail">ID Pais</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id_pais"
+                          type="number"
+                          formControlName="id_pais"
+                          class="form-control"
+                          placeholder="ID Pais"
+                          name="id_pais"
+                        />
+                      </div>
+                      <label for="inputEmail">ID Frontera</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="check_frontera"
+                          type="number"
+                          class="form-control"
+                          formControlName="check_frontera"
+                          name="check_frontera"
+                          placeholder="check_frontera"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Norte</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="norte"
+                          type="text"
+                          class="form-control"
+                          formControlName="norte"
+                          name="norte"
+                          placeholder="norte"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Sur</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="sur"
+                          type="text"
+                          class="form-control"
+                          formControlName="sur"
+                          name="sur"
+                          placeholder="sur"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Este</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="este"
+                          type="text"
+                          class="form-control"
+                          formControlName="este"
+                          name="este"
+                          placeholder="Este"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Oeste</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="oeste"
+                          type="text"
+                          class="form-control"
+                          formControlName="oeste"
+                          name="oeste"
+                          placeholder="Oeste"
+                        />
+                      </div>
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!FronteraRegisterForm.valid"
+                        type="submit"
+                      >
+                        Crear Fronteras
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center; margin-top: 3cm">
+        <button ion-button block (click)="accion6()">Eliminar Fronteras</button>
+      </ion-col>
+      <ion-card *ngIf="ocultar6">
+        <div class="scrollable-menu">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: mediumspringgreen">
+                    <h5 style="text-align: center">Eliminar Fronteras</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="FronteraDeleteRegisterForm"
+                      (ngSubmit)="EliminarFronteras()"
+                    >
+                      <label for="inputEmail">ID Frontera</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id_frontera"
+                          type="number"
+                          formControlName="id_frontera"
+                          class="form-control"
+                          placeholder="ID Frontera"
+                          name="id_frontera"
+                        />
+                      </div>
+
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!FronteraDeleteRegisterForm.valid"
+                        type="submit"
+                      >
+                        Eliminar Frontera
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center; margin-top: 3cm">
+        <button ion-button block (click)="accion7()">Editar Fronteras</button>
+      </ion-col>
+      <ion-card *ngIf="ocultar7">
+        <div class="scrollable-menu">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                  <div class="card-body" style="background: yellow">
+                    <h5 style="text-align: center">Editar Fronteras</h5>
+                    <form
+                      class="form-signin"
+                      [formGroup]="FronteraUpdateRegisterForm"
+                      (ngSubmit)="UpdateFronteras()"
+                    >
+                      <label for="inputEmail">ID Frontera</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id_frontera"
+                          type="number"
+                          formControlName="id_frontera"
+                          class="form-control"
+                          placeholder="ID Frontera"
+                          name="id_frontera"
+                        />
+                      </div>
+                      <label for="inputEmail">ID Pais</label>
+                      <div class="form-label-group">
+                        <input
+                          required
+                          id="id_pais"
+                          type="number"
+                          formControlName="id_pais"
+                          class="form-control"
+                          placeholder="ID Pais"
+                          name="id_pais"
+                        />
+                      </div>
+                      <label for="inputEmail">ID Frontera</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="check_frontera"
+                          type="number"
+                          class="form-control"
+                          formControlName="check_frontera"
+                          name="check_frontera"
+                          placeholder="check_frontera"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Norte</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="norte"
+                          type="text"
+                          class="form-control"
+                          formControlName="norte"
+                          name="norte"
+                          placeholder="norte"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Sur</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="sur"
+                          type="text"
+                          class="form-control"
+                          formControlName="sur"
+                          name="sur"
+                          placeholder="sur"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Este</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="este"
+                          type="text"
+                          class="form-control"
+                          formControlName="este"
+                          name="este"
+                          placeholder="Este"
+                        />
+                      </div>
+
+                      <label for="inputEmail">Oeste</label>
+
+                      <div class="form-label-group">
+                        <input
+                          id="oeste"
+                          type="text"
+                          class="form-control"
+                          formControlName="oeste"
+                          name="oeste"
+                          placeholder="Oeste"
+                        />
+                      </div>
+                      <button
+                        class="btn btn-lg btn-primary btn-block text-uppercase"
+                        [disabled]="!FronteraUpdateRegisterForm.valid"
+                        type="submit"
+                      >
+                        Actualizar Frontera
+                      </button>
+                      <hr class="my-4" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card>
+      <ion-col width-50 style="text-align: center; margin-top: 3cm">
+        <button ion-button block (click)="accion8()">Ver Fronteras</button>
+      </ion-col>
+      <ion-card *ngIf="ocultar8">
+        <div class="scrollable-menu2">
+          <h1 style="text-align: center">Fronteras</h1>
+
+          <table
+            class="table table-hover"
+            style="
+              background: linear-gradient(to right, rgb(0, 247, 255), magenta);
+            "
+          >
+            <thead>
+              <tr>
+                <th scope="col">#ID Frontera</th>
+                <th scope="col">#ID Pais</th>
+                <th scope="col">Pais</th>
+                <th scope="col">#ID Frontera</th>
+                <th scope="col">Frontera</th>
+                <th scope="col">Sur</th>
+                <th scope="col">Norte</th>
+                <th scope="col">Este</th>
+                <th scope="col">Oeste</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fronteras of fronteras">
+                <td>{{fronteras.id_frontera}}</td>
+                <td>{{fronteras.id_pais}}</td>
+                <td>{{fronteras.pais}}</td>
+                <td>{{fronteras.id_frontera_pais}}</td>
+                <td>{{fronteras.frontera}}</td>
+                <td>{{fronteras.sur}}</td>
+                <td>{{fronteras.norte}}</td>
+                <td>{{fronteras.este}}</td>
+                <td>{{fronteras.oeste}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-card>
+    </ion-row>
+  </body>
+</ion-content>

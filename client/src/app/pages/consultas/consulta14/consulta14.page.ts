@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConsultasService } from "../../../services-usuario/consultas.service";
-import { consulta14 } from "../../../models-consultas/consultas";
+import { ConsultasService } from "../../../services/consultas.service";
+import { consulta14 } from "../../../models/consultas";
 import { FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 @Component({
