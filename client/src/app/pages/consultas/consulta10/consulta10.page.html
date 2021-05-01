@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      ><h5 class="card-title text-center">
+        <ion-icon name="keypad"></ion-icon> Consulta 10
+      </h5></ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <body>
+    <div class="boxContenedor">
+      <div class="form-group" style="text-align: right">
+        <div class="col-sm-offset-2 col-sm-12">
+          <button
+            type="submit"
+            [routerLink]="['/inicio-admin']"
+            class="btn btn-primary"
+          >
+            ⬅ Regresar al Modulo Admin
+          </button>
+        </div>
+      </div>
+
+      <h1 style="text-align: center">Consulta 10</h1>
+      <h2 style="text-align: center">{{date}}</h2>
+      <table
+        class="table table-hover"
+        style="background: linear-gradient(to right, rgb(94, 255, 0), magenta)"
+      >
+        <thead>
+          <tr>
+            <th style="text-align: center" scope="col">Inventor</th>
+            <th style="text-align: center" scope="col">Invento</th>
+            <th style="text-align: center" scope="col">Año Invento</th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let consulta10 of consulta10">
+          <tr>
+            <td style="text-align: center">
+              {{consulta10.inventor}}
+            </td>
+            <td style="text-align: center">
+              {{consulta10.invento}}
+            </td>
+            <td style="text-align: center">
+              {{consulta10.anio_invento}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</ion-content>

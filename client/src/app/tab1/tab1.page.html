@@ -1,19 +1,20 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div style="margin: 2.5cm;" class="col-sm-15 col-md-7 col-lg-6 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">LOGIN<ion-icon name="create"></ion-icon></h5>
+            <h5 id="time" class="card-title text-center"> {{date}}</h5>
             <form class="form-signin" [formGroup]="loginForm"  (ngSubmit) = "iniciarSesion()" >
-                 <label for="inputEmail">Email address</label>
+                 <label for="inputEmail">Usuario</label>
               <div class="form-label-group">
                 <input required id="usaurio" formControlName="correo_electronico" type="email" class="form-control" placeholder="Usuarios" name="usuario">
                 <div *ngIf="loginForm.get('correo_electronico').invalid && (loginForm.get('correo_electronico').dirty || loginForm.get('correo_electronico').touched)">
 
                  <div class="alert alert-danger" role="alert" 
                  *ngIf="loginForm.get('correo_electronico').errors && loginForm.get('correo_electronico').errors['required']">
-                  email is required  
+                  user is required  
                  </div>
                  
                  <div class="alert alert-warning" role="alert" *ngIf="loginForm.get('correo_electronico').errors && loginForm.get('correo_electronico').errors['maxlength']">
@@ -42,10 +43,7 @@
              
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!loginForm.valid" type="submit">Sign in</button>
-              <div>
-                <a class="d-block text-center mt-2 small" [routerLink]="['/registro-estudiantes']">Crear Cuenta</a>
-                <a class="d-block text-center mt-2 small" [routerLink]="['/recuperar-password']">Olvidar Contraseña</a>
-              </div>
+            
               
               <hr class="my-4">
             </form>

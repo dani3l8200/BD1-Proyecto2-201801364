@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title
+      ><h5 class="card-title text-center">
+        <ion-icon name="keypad"></ion-icon> Consulta 5
+      </h5></ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <body>
+    <div class="boxContenedor">
+      <div class="form-group" style="text-align: right">
+        <div class="col-sm-offset-2 col-sm-12">
+          <button
+            type="submit"
+            [routerLink]="['/inicio-admin']"
+            class="btn btn-primary"
+          >
+            ⬅ Regresar al Modulo Admin
+          </button>
+        </div>
+      </div>
+
+      <h1 style="text-align: center">Consulta 5</h1>
+      <h2 style="text-align: center">{{date}}</h2>
+      <table
+        class="table table-hover"
+        style="background: linear-gradient(to right, rgb(51, 255, 0), rgb(0, 255, 221))"
+      >
+        <thead>
+          <tr>
+            <th style="text-align: center" scope="col">Nombre</th>
+            <th style="text-align: center" scope="col">Salario</th>
+            <th style="text-align: center" scope="col">Area</th>
+            <th style="text-align: center" scope="col">Promedio</th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let consulta5 of consulta5">
+          <tr>
+            <td style="text-align: center">
+              {{consulta5.nombre}}
+            </td>
+            <td style="text-align: center">
+              {{consulta5.salario}}
+            </td>
+            <td style="text-align: center">
+              {{consulta5.area}}
+            </td>
+            <td style="text-align: center">
+              {{consulta5.promedio}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</ion-content>

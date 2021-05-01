@@ -8,10 +8,16 @@ import { Router } from "@angular/router";
 })
 export class Tab1Page implements OnInit {
   loginForm: FormGroup;
-  constructor(
-    private fb: FormBuilder,
-    private _router: Router
-  ) {}
+  date: string;
+  constructor(private fb: FormBuilder, private _router: Router) {
+    let refreshTime = () => {
+      this.date = new Date().toLocaleString("es-GT", {
+        timeZone: "America/Guatemala",
+      });
+      this.date = this.date.replace(", ", " - ");
+    };
+    setInterval(refreshTime, 1000);
+  }
 
   ngOnInit() {
     this.loginForm = this.fb.group({

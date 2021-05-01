@@ -117,7 +117,8 @@ CREATE PROCEDURE CONSULTA8()
 BEGIN
 	select substring(pais,1,1) letra, sum(area_km2) area 
 	from pais 
-	group by substring(pais,1,1);
+	group by substring(pais,1,1)
+    order by letra;
 END;
 $$
 

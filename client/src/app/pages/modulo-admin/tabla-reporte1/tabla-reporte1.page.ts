@@ -1,4 +1,6 @@
 import { ReportesService } from './../../../services-usuario/reportes.service';
+import { ConsultasService } from '../../../services-usuario/consultas.service'
+import { consulta1 } from '../../../models-consultas/consultas'
 import { Report1 } from './../../../modals-usuario/report1';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -15,13 +17,13 @@ import {ObtenerPreguntas} from 'src/app/modals-usuario/ObtenerPreguntas';
   styleUrls: ['./tabla-reporte1.page.scss'],
 })
 export class TablaReporte1Page implements OnInit {
-ConsultaAsignaciones: Report1[] = [
+ConsultaAsignaciones: consulta1[] = [
   
 ];
-constructor(private fb: FormBuilder,private consultaService: ReportesService, private _router:Router) { }
+constructor(private fb: FormBuilder,private consultaService: ConsultasService, private _router:Router) { }
 
   ngOnInit() {
-    this.consultaService.reporte1(localStorage.getItem("curso")).subscribe(
+    this.consultaService.consulta1().subscribe(
       (ConsultaAsignaciones) => this.ConsultaAsignaciones = ConsultaAsignaciones);
   }
 
